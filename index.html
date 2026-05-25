@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Planète Breizh | Boutique bretonne libre</title>
+    <meta
+      name="description"
+      content="Planète Breizh, boutique e-commerce de t-shirts, casquettes et gourdes inspirés par la Bretagne, la mer et l'esprit libre."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#accueil" aria-label="Planète Breizh accueil">
+        <img src="assets/planete-breizh-logo.jpeg" alt="" />
+        <span>Planète Breizh</span>
+      </a>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <a href="#boutique">Boutique</a>
+        <a href="#dropshipping">Dropshipping</a>
+        <a href="#histoire">Histoire</a>
+      </nav>
+      <button class="cart-button" type="button" data-open-cart aria-label="Ouvrir le panier">
+        Panier <span data-cart-count>0</span>
+      </button>
+    </header>
+
+    <main id="accueil">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Sois libre. Sois vrai. Ancre-toi.</p>
+          <h1>Planète Breizh</h1>
+          <p>
+            Une boutique bretonne pour porter le phare, les vagues et le caractère
+            de l'ouest: t-shirts, casquettes et gourdes prêts pour le quotidien.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#boutique">Voir la boutique</a>
+            <a class="secondary-action" href="#dropshipping">Mode dropshipping</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Illustration Planète Breizh">
+          <img src="assets/planete-breizh-illustration.jpeg" alt="Planète Breizh avec phare, vagues et symboles bretons" />
+        </div>
+      </section>
+
+      <section class="feature-strip" aria-label="Promesses boutique">
+        <div>
+          <strong>Production à la demande</strong>
+          <span>Pas de stock dormant, les pièces sont fabriquées après commande.</span>
+        </div>
+        <div>
+          <strong>Identité bretonne</strong>
+          <span>Visuels marins, triskels, phare et esprit indépendant.</span>
+        </div>
+        <div>
+          <strong>Prêt GitHub Pages</strong>
+          <span>Site statique publiable rapidement, paiement à connecter.</span>
+        </div>
+      </section>
+
+      <section class="shop-section" id="boutique">
+        <div class="section-heading">
+          <p class="eyebrow">Collection de lancement</p>
+          <h2>Les essentiels Planète Breizh</h2>
+        </div>
+        <div class="product-grid" data-product-grid></div>
+      </section>
+
+      <section class="dropshipping" id="dropshipping">
+        <div>
+          <p class="eyebrow">Architecture e-commerce</p>
+          <h2>Prêt pour Printful, Printify ou Shopify Buy Button</h2>
+        </div>
+        <div class="dropshipping-grid">
+          <article>
+            <span>1</span>
+            <h3>Produits à la demande</h3>
+            <p>Chaque article peut être relié à un fournisseur POD pour impression, emballage et livraison.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Paiement sécurisé</h3>
+            <p>Le bouton de commande peut être remplacé par Stripe Checkout, Shopify ou WooCommerce.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Publication GitHub</h3>
+            <p>Le site est statique: simple à héberger sur GitHub Pages avec un domaine personnalisé.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="story" id="histoire">
+        <div class="story-image">
+          <img src="assets/planete-breizh-logo.jpeg" alt="Logo Planète Breizh avec phare et vagues" />
+        </div>
+        <div>
+          <p class="eyebrow">La marque</p>
+          <h2>Une planète pour ceux qui gardent le cap</h2>
+          <p>
+            Planète Breizh mélange l'imaginaire breton, les constellations et le
+            style outdoor. Une marque simple, franche et ancrée, pensée pour une
+            boutique légère qui peut grandir vers un vrai tunnel de vente.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <aside class="cart-panel" data-cart-panel aria-hidden="true">
+      <div class="cart-shell">
+        <div class="cart-header">
+          <h2>Panier</h2>
+          <button type="button" data-close-cart aria-label="Fermer le panier">×</button>
+        </div>
+        <div class="cart-items" data-cart-items></div>
+        <div class="cart-footer">
+          <div class="cart-total">
+            <span>Total</span>
+            <strong data-cart-total>0,00 €</strong>
+          </div>
+          <a class="checkout-button" href="mailto:contact@planetebreizh.fr?subject=Commande%20Plan%C3%A8te%20Breizh" data-checkout>
+            Demander la commande
+          </a>
+          <p>Remplace ce lien par Stripe, Shopify ou WooCommerce quand le fournisseur est choisi.</p>
+        </div>
+      </div>
+    </aside>
+
+    <footer class="site-footer">
+      <strong>Planète Breizh</strong>
+      <span>Boutique bretonne en dropshipping responsable.</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
