@@ -37,12 +37,12 @@ Pour vendre réellement:
 4. Remplacer le lien e-mail du checkout par Stripe Checkout, Shopify Buy Button,
    WooCommerce, ou un lien Printful partageable.
 
-Autres options possibles:
+Choix recommandé: Printful. C'est le plus direct pour démarrer cette version du
+site, car il permet de créer les produits, générer des templates partageables et
+évoluer ensuite vers Shopify ou WooCommerce.
 
-- Printify pour comparer les imprimeurs et marges.
-- Shopify si tu veux un vrai back-office e-commerce complet.
-- GitHub Pages + Stripe Payment Links pour rester très simple.
-- Un domaine du type `planetebreizh.fr` avec GitHub Pages ou Shopify.
+Plus tard, un domaine du type `planetebreizh.fr` pourra pointer vers GitHub Pages
+ou vers une boutique Shopify si tu veux un vrai back-office e-commerce complet.
 
 Les produits sont dans `script.js`. Remplacer les prix, descriptions et liens de
 commande quand le fournisseur est choisi.
