@@ -17,6 +17,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section {
+  scroll-margin-top: 96px;
+}
+
 body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
