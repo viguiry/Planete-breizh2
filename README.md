@@ -20,12 +20,28 @@ Puis ouvrir `http://localhost:8080`.
 3. Dans GitHub: `Settings` -> `Pages` -> `Deploy from a branch`.
 4. Choisir `main` et `/root`.
 
-## Brancher le dropshipping
+## Brancher le dropshipping avec Printful
 
-Le panier actuel prépare une demande par e-mail. Pour vendre réellement:
+Le panier actuel prépare une demande par e-mail. Les fiches produits contiennent
+des liens vers Printful pour créer les produits:
 
-- Printful ou Printify pour les produits à la demande.
-- Stripe Checkout, Shopify Buy Button ou WooCommerce pour le paiement.
+- T-shirt: <https://www.printful.com/make-your-own-shirt>
+- Casquette: <https://www.printful.com/custom/hats>
+- Gourde: <https://www.printful.com/custom/water-bottles>
+
+Pour vendre réellement:
+
+1. Créer chaque produit dans Printful avec le visuel Planète Breizh.
+2. Enregistrer le produit comme template ou lien partageable MerchShare.
+3. Remplacer les `makerUrl` dans `script.js` par les URLs de tes vrais produits.
+4. Remplacer le lien e-mail du checkout par Stripe Checkout, Shopify Buy Button,
+   WooCommerce, ou un lien Printful partageable.
+
+Autres options possibles:
+
+- Printify pour comparer les imprimeurs et marges.
+- Shopify si tu veux un vrai back-office e-commerce complet.
+- GitHub Pages + Stripe Payment Links pour rester très simple.
 - Un domaine du type `planetebreizh.fr` avec GitHub Pages ou Shopify.
 
 Les produits sont dans `script.js`. Remplacer les prix, descriptions et liens de

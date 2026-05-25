@@ -6,6 +6,8 @@ const products = [
     label: "PHARE\nBREIZH",
     description: "Coton bio premium, coupe unisexe, visuel phare et vagues Planète Breizh.",
     price: 29.9,
+    makerUrl: "https://www.printful.com/make-your-own-shirt",
+    makerLabel: "Créer sur Printful",
   },
   {
     id: "cap-ancre",
@@ -14,6 +16,8 @@ const products = [
     label: "PB",
     description: "Casquette marine brodée, réglable, pensée pour les jours de vent et de soleil.",
     price: 24.9,
+    makerUrl: "https://www.printful.com/custom/hats",
+    makerLabel: "Créer la casquette",
   },
   {
     id: "bottle-ouest",
@@ -22,6 +26,8 @@ const products = [
     label: "BREIZH",
     description: "Gourde inox 500 ml, durable, légère et prête pour les randonnées côtières.",
     price: 26.9,
+    makerUrl: "https://www.printful.com/custom/water-bottles",
+    makerLabel: "Créer la gourde",
   },
 ];
 
@@ -57,6 +63,9 @@ function renderProducts() {
               <span class="price">${formatter.format(product.price)}</span>
               <button class="add-button" type="button" data-add="${product.id}">Ajouter</button>
             </div>
+            <a class="maker-action" href="${product.makerUrl}" target="_blank" rel="noopener">
+              ${product.makerLabel}
+            </a>
           </div>
         </article>
       `

@@ -79,7 +79,9 @@ img {
 .primary-action,
 .secondary-action,
 .add-button,
-.checkout-button {
+.checkout-button,
+.maker-action,
+.maker-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -161,6 +163,14 @@ img {
   color: var(--ink);
   background: white;
   border: 1px solid rgba(8, 47, 68, 0.18);
+}
+
+.maker-action {
+  width: 100%;
+  min-height: 42px;
+  color: var(--ink);
+  background: var(--foam);
+  border: 1px solid rgba(8, 47, 68, 0.14);
 }
 
 .hero-visual {
@@ -370,6 +380,13 @@ h2 {
   color: var(--ink);
   background: var(--foam);
   font-weight: 900;
+}
+
+.maker-link {
+  width: 100%;
+  margin-top: 14px;
+  color: var(--ink);
+  background: var(--foam);
 }
 
 .story {
