@@ -216,6 +216,7 @@ img {
 
 .shop-section,
 .operations,
+.social-section,
 .dropshipping,
 .story {
   padding: clamp(54px, 8vw, 104px) clamp(18px, 5vw, 76px);
@@ -511,6 +512,52 @@ h2 {
   line-height: 1.55;
 }
 
+.social-section {
+  background: var(--linen);
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.social-grid article {
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+  border: 1px solid rgba(8, 47, 68, 0.12);
+  border-radius: 8px;
+  background: linear-gradient(145deg, white, var(--foam));
+  box-shadow: 0 12px 30px rgba(8, 47, 68, 0.08);
+}
+
+.social-platform {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  color: white;
+  background: var(--rust);
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.social-grid h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.35rem;
+}
+
+.social-grid p {
+  margin: 0;
+  color: rgba(29, 36, 40, 0.72);
+  line-height: 1.55;
+}
+
 .dropshipping {
   background: var(--ink);
   color: white;
@@ -713,6 +760,7 @@ h2 {
   .feature-strip,
   .product-grid,
   .operations-grid,
+  .social-grid,
   .dropshipping-grid {
     grid-template-columns: 1fr;
   }

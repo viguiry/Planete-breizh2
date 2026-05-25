@@ -55,5 +55,29 @@ Pour rendre ces elements reels, il faut creer la boite mail chez le fournisseur
 du domaine, ouvrir un compte Stripe avec les informations legales, puis connecter
 les produits Printful au tunnel de commande.
 
+## Réseaux sociaux
+
+Handles recommandes:
+
+- Instagram: `@planetebreizh`
+- Facebook: `Planète Breizh`
+- TikTok: `@planetebreizh`
+
+Pages de creation:
+
+- Instagram: <https://www.instagram.com/>
+- Facebook Page: <https://www.facebook.com/pages/create/>
+- TikTok: <https://www.tiktok.com/signup>
+
+Bio courte:
+
+> Planète Breizh - vêtements bretons à la demande. Sois libre. Sois vrai. Ancre-toi.
+
+Premiers posts:
+
+1. Photo du logo + annonce de lancement.
+2. Carrousel des 3 produits femme et 3 produits homme.
+3. Vidéo courte du logo sur les vêtements avec appel à commander.
+
 Les produits sont dans `script.js`. Remplacer les prix, descriptions et liens de
 commande quand le fournisseur est choisi.
