@@ -1,33 +1,69 @@
 const products = [
   {
-    id: "tee-phare",
-    name: "T-shirt Phare Orbital",
-    type: "mockup-shirt",
-    label: "PHARE\nBREIZH",
-    description: "Coton bio premium, coupe unisexe, visuel phare et vagues Planète Breizh.",
+    id: "femme-tee-logo",
+    name: "T-shirt femme Logo Breizh",
+    audience: "Femme",
+    type: "mockup-shirt mockup-femme mockup-cream",
+    description: "Coupe femme, coton doux, logo Planete Breizh imprime cote coeur.",
     price: 29.9,
+    sizes: ["XS", "S", "M", "L", "XL"],
     makerUrl: "https://www.printful.com/make-your-own-shirt",
-    makerLabel: "Créer sur Printful",
+    makerLabel: "Creer sur Printful",
   },
   {
-    id: "cap-ancre",
-    name: "Casquette Ancre-toi",
-    type: "mockup-cap",
-    label: "PB",
-    description: "Casquette marine brodée, réglable, pensée pour les jours de vent et de soleil.",
-    price: 24.9,
-    makerUrl: "https://www.printful.com/custom/hats",
-    makerLabel: "Créer la casquette",
+    id: "femme-sweat-logo",
+    name: "Sweat femme Logo Phare",
+    audience: "Femme",
+    type: "mockup-sweat mockup-femme mockup-mist",
+    description: "Sweat confortable avec logo Planete Breizh central, parfait pour les soirees fraiches.",
+    price: 49.9,
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    makerUrl: "https://www.printful.com/custom/womens/sweatshirts",
+    makerLabel: "Creer le sweat",
   },
   {
-    id: "bottle-ouest",
-    name: "Gourde Grand Ouest",
-    type: "mockup-bottle",
-    label: "BREIZH",
-    description: "Gourde inox 500 ml, durable, légère et prête pour les randonnées côtières.",
-    price: 26.9,
-    makerUrl: "https://www.printful.com/custom/water-bottles",
-    makerLabel: "Créer la gourde",
+    id: "femme-tank-logo",
+    name: "Debardeur femme Vagues",
+    audience: "Femme",
+    type: "mockup-tank mockup-femme mockup-coral",
+    description: "Debardeur leger avec logo Planete Breizh, coupe ete et esprit bord de mer.",
+    price: 27.9,
+    sizes: ["XS", "S", "M", "L", "XL"],
+    makerUrl: "https://www.printful.com/custom/womens/tank-tops",
+    makerLabel: "Creer le debardeur",
+  },
+  {
+    id: "homme-tee-logo",
+    name: "T-shirt homme Logo Breizh",
+    audience: "Homme",
+    type: "mockup-shirt mockup-homme mockup-navy",
+    description: "T-shirt homme avec logo Planete Breizh poitrine, coupe droite et coton resistant.",
+    price: 29.9,
+    sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
+    makerUrl: "https://www.printful.com/make-your-own-shirt",
+    makerLabel: "Creer sur Printful",
+  },
+  {
+    id: "homme-sweat-logo",
+    name: "Sweat homme Ancre-toi",
+    audience: "Homme",
+    type: "mockup-sweat mockup-homme mockup-forest",
+    description: "Sweat epais avec logo central, pense pour les retours de plage et les matins frais.",
+    price: 49.9,
+    sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
+    makerUrl: "https://www.printful.com/custom/mens/sweatshirts",
+    makerLabel: "Creer le sweat",
+  },
+  {
+    id: "homme-hoodie-logo",
+    name: "Hoodie homme Planete",
+    audience: "Homme",
+    type: "mockup-hoodie mockup-homme mockup-rust",
+    description: "Hoodie a capuche avec logo Planete Breizh, style marin chaud et robuste.",
+    price: 54.9,
+    sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
+    makerUrl: "https://www.printful.com/custom/mens/hoodies",
+    makerLabel: "Creer le hoodie",
   },
 ];
 
@@ -51,14 +87,21 @@ function renderProducts() {
         <article class="product-card">
           <div class="product-art">
             <div class="mockup ${product.type}">
-              <span>${product.label.replace("\n", "<br />")}</span>
+              <img src="assets/planete-breizh-logo-transparent.png" alt="" />
             </div>
           </div>
           <div class="product-content">
             <div>
+              <span class="product-audience">${product.audience}</span>
               <h3>${product.name}</h3>
               <p>${product.description}</p>
             </div>
+            <label class="size-picker">
+              <span>Taille</span>
+              <select data-size-for="${product.id}">
+                ${product.sizes.map((size) => `<option value="${size}">${size}</option>`).join("")}
+              </select>
+            </label>
             <div class="product-meta">
               <span class="price">${formatter.format(product.price)}</span>
               <button class="add-button" type="button" data-add="${product.id}">Ajouter</button>
@@ -73,22 +116,24 @@ function renderProducts() {
     .join("");
 }
 
-function addToCart(productId) {
+function addToCart(productId, size) {
   const product = products.find((item) => item.id === productId);
-  const quantity = cart.get(productId)?.quantity || 0;
-  cart.set(productId, { product, quantity: quantity + 1 });
+  const selectedSize = size || product.sizes[0];
+  const cartKey = `${productId}:${selectedSize}`;
+  const quantity = cart.get(cartKey)?.quantity || 0;
+  cart.set(cartKey, { product, size: selectedSize, quantity: quantity + 1 });
   renderCart();
   openCart();
 }
 
-function removeFromCart(productId) {
-  const item = cart.get(productId);
+function removeFromCart(cartKey) {
+  const item = cart.get(cartKey);
   if (!item) return;
 
   if (item.quantity <= 1) {
-    cart.delete(productId);
+    cart.delete(cartKey);
   } else {
-    cart.set(productId, { ...item, quantity: item.quantity - 1 });
+    cart.set(cartKey, { ...item, quantity: item.quantity - 1 });
   }
 
   renderCart();
@@ -105,13 +150,13 @@ function renderCart() {
   cartItems.innerHTML = items.length
     ? items
         .map(
-          ({ product, quantity }) => `
+          ({ product, size, quantity }) => `
             <div class="cart-item">
               <div>
                 <strong>${product.name}</strong>
-                <span>${quantity} x ${formatter.format(product.price)}</span>
+                <span>Taille ${size} - ${quantity} x ${formatter.format(product.price)}</span>
               </div>
-              <button type="button" data-remove="${product.id}">Retirer</button>
+              <button type="button" data-remove="${product.id}:${size}">Retirer</button>
             </div>
           `
         )
@@ -119,9 +164,9 @@ function renderCart() {
     : "<p>Ton panier est vide pour le moment.</p>";
 
   const orderLines = items
-    .map(({ product, quantity }) => `${quantity} x ${product.name} - ${formatter.format(product.price)}`)
+    .map(({ product, size, quantity }) => `${quantity} x ${product.name} taille ${size} - ${formatter.format(product.price)}`)
     .join("%0D%0A");
-  checkout.href = `mailto:contact@planetebreizh.fr?subject=Commande%20Plan%C3%A8te%20Breizh&body=${orderLines}`;
+  checkout.href = `mailto:contact@planetebreizh.fr?subject=Commande%20Planete%20Breizh&body=${orderLines}`;
 }
 
 function openCart() {
@@ -138,7 +183,10 @@ document.addEventListener("click", (event) => {
   const addButton = event.target.closest("[data-add]");
   const removeButton = event.target.closest("[data-remove]");
 
-  if (addButton) addToCart(addButton.dataset.add);
+  if (addButton) {
+    const size = document.querySelector(`[data-size-for="${addButton.dataset.add}"]`)?.value;
+    addToCart(addButton.dataset.add, size);
+  }
   if (removeButton) removeFromCart(removeButton.dataset.remove);
   if (event.target.closest("[data-open-cart]")) openCart();
   if (event.target.closest("[data-close-cart]")) closeCart();

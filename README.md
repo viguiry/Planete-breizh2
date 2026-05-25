@@ -1,7 +1,8 @@
 # Planète Breizh
 
-Site vitrine e-commerce statique pour une boutique bretonne en dropshipping:
-t-shirts, casquettes et gourdes.
+Site vitrine e-commerce statique pour une boutique bretonne en dropshipping.
+La collection de lancement contient 6 textiles avec logo: 3 produits femme et
+3 produits homme, avec choix de tailles.
 
 ## Lancer localement
 
