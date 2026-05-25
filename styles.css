@@ -211,6 +211,7 @@ img {
 }
 
 .shop-section,
+.operations,
 .dropshipping,
 .story {
   padding: clamp(54px, 8vw, 104px) clamp(18px, 5vw, 76px);
@@ -459,6 +460,53 @@ h2 {
   background: var(--ink);
 }
 
+.operations {
+  background: var(--foam);
+  border-top: 1px solid rgba(8, 47, 68, 0.12);
+}
+
+.operations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.operations article {
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+  border: 1px solid rgba(8, 47, 68, 0.12);
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 12px 30px rgba(8, 47, 68, 0.08);
+}
+
+.operation-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  color: white;
+  background: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.operations h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.35rem;
+}
+
+.operations p {
+  margin: 0;
+  color: rgba(29, 36, 40, 0.72);
+  line-height: 1.55;
+}
+
 .dropshipping {
   background: var(--ink);
   color: white;
@@ -660,6 +708,7 @@ h2 {
 
   .feature-strip,
   .product-grid,
+  .operations-grid,
   .dropshipping-grid {
     grid-template-columns: 1fr;
   }

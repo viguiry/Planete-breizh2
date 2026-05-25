@@ -79,6 +79,7 @@ const cartItems = document.querySelector("[data-cart-items]");
 const cartCount = document.querySelector("[data-cart-count]");
 const cartTotal = document.querySelector("[data-cart-total]");
 const checkout = document.querySelector("[data-checkout]");
+const contactEmail = "contact@planetebreizh.fr";
 
 function renderProducts() {
   grid.innerHTML = products
@@ -166,7 +167,22 @@ function renderCart() {
   const orderLines = items
     .map(({ product, size, quantity }) => `${quantity} x ${product.name} taille ${size} - ${formatter.format(product.price)}`)
     .join("%0D%0A");
-  checkout.href = `mailto:contact@planetebreizh.fr?subject=Commande%20Planete%20Breizh&body=${orderLines}`;
+  const details = [
+    "Bonjour Planete Breizh,",
+    "",
+    "Je souhaite commander:",
+    orderLines || "Panier vide",
+    "",
+    `Total: ${formatter.format(total)}`,
+    "",
+    "Paiement souhaite: lien Stripe securise",
+    "Livraison souhaitee: Printful avec suivi",
+    "",
+    "Nom:",
+    "Adresse de livraison:",
+    "Telephone:",
+  ].join("%0D%0A");
+  checkout.href = `mailto:${contactEmail}?subject=Commande%20Planete%20Breizh&body=${details}`;
 }
 
 function openCart() {

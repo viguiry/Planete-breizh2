@@ -45,5 +45,15 @@ site, car il permet de créer les produits, générer des templates partageables
 Plus tard, un domaine du type `planetebreizh.fr` pourra pointer vers GitHub Pages
 ou vers une boutique Shopify si tu veux un vrai back-office e-commerce complet.
 
+## Email, paiement et livraison
+
+- Email recommande: `contact@planetebreizh.fr`.
+- Paiement recommande: Stripe Payment Link.
+- Livraison recommandee: Printful avec suivi.
+
+Pour rendre ces elements reels, il faut creer la boite mail chez le fournisseur
+du domaine, ouvrir un compte Stripe avec les informations legales, puis connecter
+les produits Printful au tunnel de commande.
+
 Les produits sont dans `script.js`. Remplacer les prix, descriptions et liens de
 commande quand le fournisseur est choisi.
