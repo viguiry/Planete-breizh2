@@ -253,8 +253,14 @@ h2 {
   display: grid;
   place-items: center;
   min-height: 255px;
-  padding: 28px;
+  padding: 0;
   background: linear-gradient(145deg, var(--mist), #fff4df);
+}
+
+.product-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
 
 .mockup {
@@ -716,7 +722,7 @@ h2 {
 }
 
 .cart-actions a {
-  color: var(--sea);
+  color: var(--ocean);
   text-decoration: none;
 }
 

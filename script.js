@@ -4,6 +4,7 @@ const products = [
     name: "T-shirt femme Logo Breizh",
     audience: "Femme",
     type: "mockup-shirt mockup-femme mockup-cream",
+    image: "assets/products/femme-tee-logo.jpg",
     description: "Coupe femme, coton doux, logo Planete Breizh imprime cote coeur.",
     price: 29.9,
     sizes: ["XS", "S", "M", "L", "XL"],
@@ -16,6 +17,7 @@ const products = [
     name: "Sweat femme Logo Phare",
     audience: "Femme",
     type: "mockup-sweat mockup-femme mockup-mist",
+    image: "assets/products/femme-sweat-logo.jpg",
     description: "Sweat confortable avec logo Planete Breizh central, parfait pour les soirees fraiches.",
     price: 49.9,
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
@@ -28,6 +30,7 @@ const products = [
     name: "Debardeur femme Vagues",
     audience: "Femme",
     type: "mockup-tank mockup-femme mockup-coral",
+    image: "assets/products/femme-tank-logo.jpg",
     description: "Debardeur leger avec logo Planete Breizh, coupe ete et esprit bord de mer.",
     price: 27.9,
     sizes: ["XS", "S", "M", "L", "XL"],
@@ -40,6 +43,7 @@ const products = [
     name: "T-shirt homme Logo Breizh",
     audience: "Homme",
     type: "mockup-shirt mockup-homme mockup-navy",
+    image: "assets/products/homme-tee-logo.jpg",
     description: "T-shirt homme avec logo Planete Breizh poitrine, coupe droite et coton resistant.",
     price: 29.9,
     sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
@@ -52,6 +56,7 @@ const products = [
     name: "Sweat homme Ancre-toi",
     audience: "Homme",
     type: "mockup-sweat mockup-homme mockup-forest",
+    image: "assets/products/homme-sweat-logo.jpg",
     description: "Sweat epais avec logo central, pense pour les retours de plage et les matins frais.",
     price: 49.9,
     sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
@@ -64,6 +69,7 @@ const products = [
     name: "Hoodie homme Planete",
     audience: "Homme",
     type: "mockup-hoodie mockup-homme mockup-rust",
+    image: "assets/products/homme-hoodie-logo.jpg",
     description: "Hoodie a capuche avec logo Planete Breizh, style marin chaud et robuste.",
     price: 54.9,
     sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
@@ -85,6 +91,7 @@ const cartItems = document.querySelector("[data-cart-items]");
 const cartCount = document.querySelector("[data-cart-count]");
 const cartTotal = document.querySelector("[data-cart-total]");
 const checkout = document.querySelector("[data-checkout]");
+const checkoutEndpoint = window.PLANETE_BREIZH_CHECKOUT_ENDPOINT || "";
 
 function renderProducts() {
   grid.innerHTML = products
@@ -92,9 +99,7 @@ function renderProducts() {
       (product) => `
         <article class="product-card">
           <div class="product-art">
-            <div class="mockup ${product.type}">
-              <img src="assets/planete-breizh-logo-transparent.png" alt="" />
-            </div>
+            <img class="product-photo" src="${product.image}" alt="${product.name} avec logo Planete Breizh" loading="lazy" />
           </div>
           <div class="product-content">
             <div>
@@ -172,7 +177,12 @@ function renderCart() {
         .join("")
     : "<p>Ton panier est vide pour le moment.</p>";
 
-  if (items.length === 1) {
+  if (checkoutEndpoint && items.length) {
+    checkout.href = "#";
+    checkout.removeAttribute("target");
+    checkout.removeAttribute("rel");
+    checkout.textContent = "Payer le panier";
+  } else if (items.length === 1) {
     checkout.href = items[0].product.paymentUrl;
     checkout.target = "_blank";
     checkout.rel = "noopener";
@@ -185,12 +195,43 @@ function renderCart() {
   }
 }
 
-function handleCheckout(event) {
+async function handleCheckout(event) {
   const items = [...cart.values()];
 
   if (!items.length) {
     event.preventDefault();
     alert("Ton panier est vide.");
+    return;
+  }
+
+  if (checkoutEndpoint) {
+    event.preventDefault();
+    checkout.textContent = "Preparation du paiement...";
+    checkout.setAttribute("aria-busy", "true");
+
+    try {
+      const response = await fetch(checkoutEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map(({ product, size, quantity }) => ({
+            id: product.id,
+            size,
+            quantity,
+          })),
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok || !data.url) throw new Error(data.error || "Paiement indisponible");
+      window.location.href = data.url;
+    } catch (error) {
+      alert(`Impossible de preparer le paiement Stripe: ${error.message}`);
+      renderCart();
+    } finally {
+      checkout.removeAttribute("aria-busy");
+    }
+
     return;
   }
 

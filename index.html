@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Permanent+Marker&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=9" />
+    <link rel="stylesheet" href="styles.css?v=10" />
   </head>
   <body>
     <header class="site-header">
@@ -90,8 +90,8 @@
           </article>
           <article>
             <span class="operation-label">Paiement</span>
-            <h3>Stripe actif</h3>
-            <p>Paiement direct par carte, Apple Pay, Link et moyens compatibles via les liens Stripe de chaque produit.</p>
+            <h3>Stripe Checkout</h3>
+            <p>Panier unique par carte, Apple Pay, Link et moyens compatibles quand le backend Stripe est deploye.</p>
             <a class="maker-action" href="https://stripe.com/payments/payment-links" target="_blank" rel="noopener">
               Voir Stripe
             </a>
@@ -204,7 +204,7 @@
           <a class="checkout-button" href="#" data-checkout>
             Payer maintenant
           </a>
-          <p>Paiement direct par Stripe. Pour plusieurs produits differents, utilisez le bouton Payer de chaque ligne du panier.</p>
+          <p>Paiement direct par Stripe. Le panier complet passe par Stripe Checkout quand le backend est configure.</p>
         </div>
       </div>
     </aside>
@@ -214,6 +214,7 @@
       <span>Boutique bretonne en dropshipping responsable.</span>
     </footer>
 
-    <script src="script.js?v=9"></script>
+    <script src="config.js?v=1"></script>
+    <script src="script.js?v=10"></script>
   </body>
 </html>

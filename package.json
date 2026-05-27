@@ -1,0 +1,12 @@
+{
+  "name": "planete-breizh",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npx vercel dev",
+    "serve": "python -m http.server 8080 --bind 127.0.0.1"
+  },
+  "dependencies": {
+    "stripe": "^22.2.0"
+  }
+}

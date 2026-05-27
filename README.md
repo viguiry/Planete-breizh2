@@ -23,14 +23,40 @@ Puis ouvrir `http://localhost:8080`.
 
 ## Paiement Stripe
 
-Le site utilise des liens Stripe Payment Links pour payer directement chaque
-produit. Les URLs sont dans `script.js` via la propriete `paymentUrl`, et une
-copie de suivi existe dans `stripe-links.json`.
+Le site garde les liens Stripe Payment Links en secours, mais il contient aussi
+un endpoint Stripe Checkout pret pour un vrai panier unique:
 
-Important: GitHub Pages seul ne peut pas creer une session Stripe Checkout
-dynamique et securisee pour un panier mixte. Pour payer plusieurs produits
-differents en un seul paiement, il faudra connecter Shopify a Printful ou
-ajouter un backend Stripe Checkout.
+- Frontend: `script.js`
+- Configuration frontend: `config.js`
+- Backend Vercel: `api/create-checkout-session.js`
+- Catalogue serveur: `api/catalog.js`
+
+GitHub Pages ne peut pas executer ce backend. Il faut le deployer sur Vercel,
+Netlify, Render ou un autre hebergeur Node, puis mettre l'URL de l'endpoint dans
+`config.js`.
+
+Variables serveur a definir:
+
+```text
+STRIPE_SECRET_KEY=sk_live_xxx
+SITE_URL=https://viguiry.github.io/Planete-breizh2
+ALLOWED_ORIGIN=https://viguiry.github.io
+```
+
+Exemple apres deploiement Vercel:
+
+```js
+window.PLANETE_BREIZH_CHECKOUT_ENDPOINT = "https://ton-backend.vercel.app/api/create-checkout-session";
+```
+
+Le backend verifie les IDs produits, les tailles et les quantites cote serveur
+avant de creer la session Stripe Checkout.
+
+## Photos produits
+
+Les fiches utilisent des images de mockup dans `assets/products`. Elles servent
+de visuels boutique. Pour des photos contractuelles exactes, exporter les mockups
+depuis Printful apres creation definitive des produits.
 
 ## Dropshipping Printful
 
@@ -40,8 +66,18 @@ Les produits Printful sont publies dans la boutique Printful manuelle/API
 Flux actuel:
 
 1. Le client choisit un produit sur le site.
-2. Le client paie via Stripe Payment Link.
+2. Le client paie via Stripe Checkout.
 3. La commande est ensuite traitee dans Printful.
+
+## Shopify ou Stripe custom?
+
+Pour une boutique Printful qui doit vendre vite, Shopify est le choix le plus
+simple: panier, variantes, taxes, livraison, emails clients, paiements et
+integration Printful sont deja prevus.
+
+Stripe Checkout avec backend est plus leger et moins cher a demarrer, mais il
+faut gerer soi-meme le catalogue, les webhooks, la transmission des commandes a
+Printful, les emails et les cas de support.
 
 ## Email, paiement et livraison
 
