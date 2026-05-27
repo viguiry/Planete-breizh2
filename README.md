@@ -1,4 +1,4 @@
-# Planète Breizh
+# Planete Breizh
 
 Site vitrine e-commerce statique pour une boutique bretonne en dropshipping.
 La collection de lancement contient 6 textiles avec logo: 3 produits femme et
@@ -16,51 +16,45 @@ Puis ouvrir `http://localhost:8080`.
 
 ## Publier sur GitHub Pages
 
-1. Créer un dépôt GitHub nommé `planete-breizh`.
+1. Creer un depot GitHub nomme `planete-breizh`.
 2. Pousser ce dossier sur la branche `main`.
 3. Dans GitHub: `Settings` -> `Pages` -> `Deploy from a branch`.
 4. Choisir `main` et `/root`.
 
-## Brancher le dropshipping avec Printful
+## Paiement Stripe
 
-Le panier actuel prépare une demande par e-mail. Les fiches produits contiennent
-des liens vers Printful pour créer les produits:
+Le site utilise des liens Stripe Payment Links pour payer directement chaque
+produit. Les URLs sont dans `script.js` via la propriete `paymentUrl`, et une
+copie de suivi existe dans `stripe-links.json`.
 
-- T-shirt: <https://www.printful.com/make-your-own-shirt>
-- Casquette: <https://www.printful.com/custom/hats>
-- Gourde: <https://www.printful.com/custom/water-bottles>
+Important: GitHub Pages seul ne peut pas creer une session Stripe Checkout
+dynamique et securisee pour un panier mixte. Pour payer plusieurs produits
+differents en un seul paiement, il faudra connecter Shopify a Printful ou
+ajouter un backend Stripe Checkout.
 
-Pour vendre réellement:
+## Dropshipping Printful
 
-1. Créer chaque produit dans Printful avec le visuel Planète Breizh.
-2. Enregistrer le produit comme template ou lien partageable MerchShare.
-3. Remplacer les `makerUrl` dans `script.js` par les URLs de tes vrais produits.
-4. Remplacer le lien e-mail du checkout par Stripe Checkout, Shopify Buy Button,
-   WooCommerce, ou un lien Printful partageable.
+Les produits Printful sont publies dans la boutique Printful manuelle/API
+`Planete Breizh`.
 
-Choix recommandé: Printful. C'est le plus direct pour démarrer cette version du
-site, car il permet de créer les produits, générer des templates partageables et
-évoluer ensuite vers Shopify ou WooCommerce.
+Flux actuel:
 
-Plus tard, un domaine du type `planetebreizh.fr` pourra pointer vers GitHub Pages
-ou vers une boutique Shopify si tu veux un vrai back-office e-commerce complet.
+1. Le client choisit un produit sur le site.
+2. Le client paie via Stripe Payment Link.
+3. La commande est ensuite traitee dans Printful.
 
 ## Email, paiement et livraison
 
 - Email recommande: `contact@planetebreizh.fr`.
-- Paiement recommande: Stripe Payment Link.
+- Paiement actif: Stripe Payment Links par produit.
 - Livraison recommandee: Printful avec suivi.
 
-Pour rendre ces elements reels, il faut creer la boite mail chez le fournisseur
-du domaine, ouvrir un compte Stripe avec les informations legales, puis connecter
-les produits Printful au tunnel de commande.
-
-## Réseaux sociaux
+## Reseaux sociaux
 
 Handles recommandes:
 
 - Instagram: `@planetebreizh`
-- Facebook: `Planète Breizh`
+- Facebook: `Planete Breizh`
 - TikTok: `@planetebreizh`
 
 Pages de creation:
@@ -71,13 +65,13 @@ Pages de creation:
 
 Bio courte:
 
-> Planète Breizh - vêtements bretons à la demande. Sois libre. Sois vrai. Ancre-toi.
+> Planete Breizh - vetements bretons a la demande. Sois libre. Sois vrai. Ancre-toi.
 
 Premiers posts:
 
 1. Photo du logo + annonce de lancement.
 2. Carrousel des 3 produits femme et 3 produits homme.
-3. Vidéo courte du logo sur les vêtements avec appel à commander.
+3. Video courte du logo sur les vetements avec appel a commander.
 
 Les produits sont dans `script.js`. Remplacer les prix, descriptions et liens de
-commande quand le fournisseur est choisi.
+commande quand le fournisseur change.

@@ -698,6 +698,14 @@ h2 {
   color: rgba(29, 36, 40, 0.66);
 }
 
+.cart-actions {
+  display: grid;
+  gap: 6px;
+  align-self: center;
+  justify-items: end;
+}
+
+.cart-actions a,
 .cart-item button {
   align-self: center;
   border: 0;
@@ -705,6 +713,11 @@ h2 {
   background: transparent;
   font-weight: 900;
   cursor: pointer;
+}
+
+.cart-actions a {
+  color: var(--sea);
+  text-decoration: none;
 }
 
 .cart-total {

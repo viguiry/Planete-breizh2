@@ -7,8 +7,9 @@ const products = [
     description: "Coupe femme, coton doux, logo Planete Breizh imprime cote coeur.",
     price: 29.9,
     sizes: ["XS", "S", "M", "L", "XL"],
-    makerUrl: "https://www.printful.com/make-your-own-shirt",
-    makerLabel: "Creer sur Printful",
+    paymentUrl: "https://buy.stripe.com/5kQdR89eVezM7Dn48e0gw01",
+    makerUrl: "https://buy.stripe.com/5kQdR89eVezM7Dn48e0gw01",
+    makerLabel: "Payer maintenant",
   },
   {
     id: "femme-sweat-logo",
@@ -18,8 +19,9 @@ const products = [
     description: "Sweat confortable avec logo Planete Breizh central, parfait pour les soirees fraiches.",
     price: 49.9,
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-    makerUrl: "https://www.printful.com/custom/womens/sweatshirts",
-    makerLabel: "Creer le sweat",
+    paymentUrl: "https://buy.stripe.com/aFadR8aiZbnA5vf34a0gw02",
+    makerUrl: "https://buy.stripe.com/aFadR8aiZbnA5vf34a0gw02",
+    makerLabel: "Payer maintenant",
   },
   {
     id: "femme-tank-logo",
@@ -29,8 +31,9 @@ const products = [
     description: "Debardeur leger avec logo Planete Breizh, coupe ete et esprit bord de mer.",
     price: 27.9,
     sizes: ["XS", "S", "M", "L", "XL"],
-    makerUrl: "https://www.printful.com/custom/womens/tank-tops",
-    makerLabel: "Creer le debardeur",
+    paymentUrl: "https://buy.stripe.com/cNi5kC9eV0IW6zj9sy0gw03",
+    makerUrl: "https://buy.stripe.com/cNi5kC9eV0IW6zj9sy0gw03",
+    makerLabel: "Payer maintenant",
   },
   {
     id: "homme-tee-logo",
@@ -40,8 +43,9 @@ const products = [
     description: "T-shirt homme avec logo Planete Breizh poitrine, coupe droite et coton resistant.",
     price: 29.9,
     sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
-    makerUrl: "https://www.printful.com/make-your-own-shirt",
-    makerLabel: "Creer sur Printful",
+    paymentUrl: "https://buy.stripe.com/7sYbJ0gHnezM3n7fQW0gw04",
+    makerUrl: "https://buy.stripe.com/7sYbJ0gHnezM3n7fQW0gw04",
+    makerLabel: "Payer maintenant",
   },
   {
     id: "homme-sweat-logo",
@@ -51,8 +55,9 @@ const products = [
     description: "Sweat epais avec logo central, pense pour les retours de plage et les matins frais.",
     price: 49.9,
     sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
-    makerUrl: "https://www.printful.com/custom/mens/sweatshirts",
-    makerLabel: "Creer le sweat",
+    paymentUrl: "https://buy.stripe.com/cNiaEWcr79fs1eZawC0gw05",
+    makerUrl: "https://buy.stripe.com/cNiaEWcr79fs1eZawC0gw05",
+    makerLabel: "Payer maintenant",
   },
   {
     id: "homme-hoodie-logo",
@@ -62,8 +67,9 @@ const products = [
     description: "Hoodie a capuche avec logo Planete Breizh, style marin chaud et robuste.",
     price: 54.9,
     sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
-    makerUrl: "https://www.printful.com/custom/mens/hoodies",
-    makerLabel: "Creer le hoodie",
+    paymentUrl: "https://buy.stripe.com/bJedR8cr7ezM5vf7kq0gw06",
+    makerUrl: "https://buy.stripe.com/bJedR8cr7ezM5vf7kq0gw06",
+    makerLabel: "Payer maintenant",
   },
 ];
 
@@ -79,7 +85,6 @@ const cartItems = document.querySelector("[data-cart-items]");
 const cartCount = document.querySelector("[data-cart-count]");
 const cartTotal = document.querySelector("[data-cart-total]");
 const checkout = document.querySelector("[data-checkout]");
-const contactEmail = "contact@planetebreizh.fr";
 
 function renderProducts() {
   grid.innerHTML = products
@@ -157,32 +162,42 @@ function renderCart() {
                 <strong>${product.name}</strong>
                 <span>Taille ${size} - ${quantity} x ${formatter.format(product.price)}</span>
               </div>
-              <button type="button" data-remove="${product.id}:${size}">Retirer</button>
+              <div class="cart-actions">
+                <a href="${product.paymentUrl}" target="_blank" rel="noopener">Payer</a>
+                <button type="button" data-remove="${product.id}:${size}">Retirer</button>
+              </div>
             </div>
           `
         )
         .join("")
     : "<p>Ton panier est vide pour le moment.</p>";
 
-  const orderLines = items
-    .map(({ product, size, quantity }) => `${quantity} x ${product.name} taille ${size} - ${formatter.format(product.price)}`)
-    .join("%0D%0A");
-  const details = [
-    "Bonjour Planete Breizh,",
-    "",
-    "Je souhaite commander:",
-    orderLines || "Panier vide",
-    "",
-    `Total: ${formatter.format(total)}`,
-    "",
-    "Paiement souhaite: lien Stripe securise",
-    "Livraison souhaitee: Printful avec suivi",
-    "",
-    "Nom:",
-    "Adresse de livraison:",
-    "Telephone:",
-  ].join("%0D%0A");
-  checkout.href = `mailto:${contactEmail}?subject=Commande%20Planete%20Breizh&body=${details}`;
+  if (items.length === 1) {
+    checkout.href = items[0].product.paymentUrl;
+    checkout.target = "_blank";
+    checkout.rel = "noopener";
+    checkout.textContent = "Payer maintenant";
+  } else {
+    checkout.href = "#";
+    checkout.removeAttribute("target");
+    checkout.removeAttribute("rel");
+    checkout.textContent = items.length ? "Payer les articles" : "Panier vide";
+  }
+}
+
+function handleCheckout(event) {
+  const items = [...cart.values()];
+
+  if (!items.length) {
+    event.preventDefault();
+    alert("Ton panier est vide.");
+    return;
+  }
+
+  if (items.length > 1) {
+    event.preventDefault();
+    alert("Paiement direct Stripe: clique sur Payer a cote de chaque article du panier. Pour un panier mixte en un seul paiement, il faudra connecter Shopify ou Stripe Checkout avec backend.");
+  }
 }
 
 function openCart() {
@@ -206,6 +221,7 @@ document.addEventListener("click", (event) => {
   if (removeButton) removeFromCart(removeButton.dataset.remove);
   if (event.target.closest("[data-open-cart]")) openCart();
   if (event.target.closest("[data-close-cart]")) closeCart();
+  if (event.target.closest("[data-checkout]")) handleCheckout(event);
   if (event.target === cartPanel) closeCart();
 });
 
