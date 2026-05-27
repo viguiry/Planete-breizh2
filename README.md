@@ -54,9 +54,8 @@ avant de creer la session Stripe Checkout.
 
 ## Photos produits
 
-Les fiches utilisent des images de mockup dans `assets/products`. Elles servent
-de visuels boutique. Pour des photos contractuelles exactes, exporter les mockups
-depuis Printful apres creation definitive des produits.
+Les fiches utilisent les previews de mockups recuperees depuis les produits
+publies Printful dans `assets/products`.
 
 ## Dropshipping Printful
 
