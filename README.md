@@ -39,9 +39,9 @@ Prix lus dans Printful:
 
 ## Migration Shopify
 
-Decision: Shopify + Printful est le meilleur chemin pour vendre proprement.
-Les anciens liens Stripe produit sont desactives sur le site pour eviter des
-prix incoherents avec Printful.
+Decision: le site utilise maintenant Stripe Checkout via le backend Raspberry Pi.
+Shopify reste une option plus complete pour une boutique future, mais elle est
+payante.
 
 Pourquoi Shopify:
 
@@ -113,10 +113,10 @@ tailscale serve --bg --https=8443 http://127.0.0.1:4242
 tailscale funnel --bg --https=8443 http://127.0.0.1:4242
 ```
 
-Exemple apres deploiement Vercel:
+Configuration active du site:
 
 ```js
-window.PLANETE_BREIZH_CHECKOUT_ENDPOINT = "https://ton-backend.vercel.app/api/create-checkout-session";
+window.PLANETE_BREIZH_CHECKOUT_ENDPOINT = "https://rasp2.tail0a90e.ts.net:8443/api/create-checkout-session";
 ```
 
 Le backend verifie les IDs produits, les tailles, les prix et les quantites cote
