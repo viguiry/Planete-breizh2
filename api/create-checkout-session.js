@@ -1,7 +1,7 @@
 const Stripe = require("stripe");
 const { products, getProductPrice } = require("./catalog");
 
-const siteUrl = process.env.SITE_URL || "https://viguiry.github.io/Planete-breizh2";
+const siteUrl = process.env.SITE_URL || "https://viguiry.github.io/planetebreizh";
 
 function sendJson(response, statusCode, payload) {
   response.statusCode = statusCode;
@@ -66,6 +66,7 @@ module.exports = async function handler(request, response) {
       line_items: lineItems,
       billing_address_collection: "required",
       phone_number_collection: { enabled: true },
+      customer_creation: "always",
       shipping_address_collection: {
         allowed_countries: ["FR", "BE", "CH", "LU", "DE", "ES", "IT", "NL"],
       },

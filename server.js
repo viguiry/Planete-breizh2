@@ -22,6 +22,7 @@ function loadEnvFile(filePath) {
 loadEnvFile(path.join(__dirname, ".env"));
 
 const checkoutHandler = require("./api/create-checkout-session");
+const stripeWebhookHandler = require("./api/stripe-webhook");
 
 const port = Number.parseInt(process.env.PORT || "4242", 10);
 
@@ -47,6 +48,23 @@ function parseJson(request) {
   });
 }
 
+function parseRaw(request) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let size = 0;
+    request.on("data", (chunk) => {
+      chunks.push(chunk);
+      size += chunk.length;
+      if (size > 1_000_000) {
+        reject(new Error("Payload trop volumineux."));
+        request.destroy();
+      }
+    });
+    request.on("end", () => resolve(Buffer.concat(chunks)));
+    request.on("error", reject);
+  });
+}
+
 function sendJson(response, statusCode, payload) {
   response.statusCode = statusCode;
   response.setHeader("Content-Type", "application/json");
@@ -61,7 +79,18 @@ const server = http.createServer(async (request, response) => {
       ok: true,
       service: "planete-breizh-checkout",
       stripeConfigured: Boolean(process.env.STRIPE_SECRET_KEY),
+      webhookConfigured: Boolean(process.env.STRIPE_WEBHOOK_SECRET),
+      emailConfigured: Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS),
     });
+  }
+
+  if (pathname === "/api/stripe-webhook") {
+    try {
+      request.rawBody = await parseRaw(request);
+      return stripeWebhookHandler(request, response);
+    } catch (error) {
+      return sendJson(response, 400, { error: error.message });
+    }
   }
 
   if (pathname !== "/api/create-checkout-session") {

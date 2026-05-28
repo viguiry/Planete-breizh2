@@ -1,90 +1,52 @@
 # Planete Breizh
 
-Site vitrine e-commerce statique pour une boutique bretonne en dropshipping.
-La collection de lancement contient 6 textiles avec logo: 3 produits femme et
-3 produits homme, avec choix de tailles.
+Boutique statique Planete Breizh avec catalogue textile, panier cote navigateur,
+paiement Stripe Checkout et backend Node heberge sur Raspberry Pi.
 
-## Lancer localement
+## Site
 
-Ouvrir `index.html` dans le navigateur, ou lancer un petit serveur:
+- Boutique: `index.html`
+- Pages legales: `cgv.html`, `mentions-legales.html`, `confidentialite.html`,
+  `retours-livraison.html`
+- Produits: `script.js`
+- Configuration checkout: `config.js`
+- Images produits: `assets/products`
 
-```powershell
-python -m http.server 8080
-```
+## Backend Stripe
 
-Puis ouvrir `http://localhost:8080`.
+Le backend expose:
 
-## Publier sur GitHub Pages
+- `GET /health`
+- `POST /api/create-checkout-session`
+- `POST /api/stripe-webhook`
 
-1. Creer un depot GitHub nomme `planete-breizh`.
-2. Pousser ce dossier sur la branche `main`.
-3. Dans GitHub: `Settings` -> `Pages` -> `Deploy from a branch`.
-4. Choisir `main` et `/root`.
-
-## Prix Printful
-
-Les prix du site sont alignes sur les prix au detail Printful des produits
-publies, taille par taille. Le frontend utilise `prices` dans `script.js`; le
-backend Stripe de secours utilise les memes prix en centimes dans
-`api/catalog.js`.
-
-Prix lus dans Printful:
-
-- Women's T-shirt: XS/S/M/L/XL `28.00 EUR`, 2XL `29.50 EUR`
-- Crop Hoodie: S/M/L/XL `45.50 EUR`, 2XL `40.00 EUR`
-- Ladies' Muscle Tank: S/M/L `21.00 EUR`, XL `20.50 EUR`, 2XL `23.50 EUR`
-- Short-Sleeve Unisex T-Shirt: S/M/L/XL `8.50 EUR`, 2XL `10.00 EUR`, 3XL `11.50 EUR`
-- Men's Tank Top: XS `16.50 EUR`, S/M/L/XL `16.00 EUR`, 2XL `17.50 EUR`
-- Unisex Hoodie: S/M/L/XL `25.00 EUR`, 2XL `26.50 EUR`, 3XL `28.50 EUR`, 4XL `30.00 EUR`, 5XL `31.50 EUR`
-
-## Migration Shopify
-
-Decision: le site utilise maintenant Stripe Checkout via le backend Raspberry Pi.
-Shopify reste une option plus complete pour une boutique future, mais elle est
-payante.
-
-Pourquoi Shopify:
-
-- variantes, prix et photos synchronises avec Printful
-- vrai panier multi-produits
-- paiement, taxes, livraison et emails clients integres
-- commandes envoyables automatiquement a Printful
-
-Etapes:
-
-1. Creer ou ouvrir la boutique Shopify Planete Breizh.
-2. Installer l'application Printful dans Shopify.
-3. Connecter le store Printful `Planete Breizh` a Shopify.
-4. Pousser les 6 produits Printful vers Shopify.
-5. Verifier prix, tailles, taxes, livraison et moyens de paiement.
-6. Remplacer le bouton panier du site GitHub Pages par le lien Shopify, ou faire
-   pointer le domaine directement vers Shopify.
-
-## Backend Stripe de secours
-
-Le repo contient encore un endpoint Stripe Checkout si on veut garder une option
-custom plus tard:
-
-- Frontend: `script.js`
-- Configuration frontend: `config.js`
-- Backend Vercel: `api/create-checkout-session.js`
-- Catalogue serveur: `api/catalog.js`
-
-GitHub Pages ne peut pas executer ce backend. Il faut le deployer sur Vercel,
-Netlify, Render ou un autre hebergeur Node, puis mettre l'URL de l'endpoint dans
-`config.js`.
-
-Variables serveur a definir:
+Variables attendues:
 
 ```text
+PORT=4242
 STRIPE_SECRET_KEY=sk_live_xxx
-SITE_URL=https://viguiry.github.io/Planete-breizh2
+STRIPE_WEBHOOK_SECRET=whsec_xxx
+SITE_URL=https://viguiry.github.io/planetebreizh
 ALLOWED_ORIGIN=https://viguiry.github.io
+
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=info@planetebreizh.com
+SMTP_PASS=mot_de_passe_smtp
+ORDER_EMAIL_FROM=Planete Breizh <info@planetebreizh.com>
+ORDER_EMAIL_TO=info@planetebreizh.com
 ```
 
-Sur `rasp2`, le backend tourne dans:
+Le webhook Stripe ecoute `checkout.session.completed` et prepare un email
+commande avec les articles, tailles, quantites, montant et adresse de livraison.
+L'envoi email devient actif quand la configuration SMTP est complete.
 
-```text
+## Raspberry Pi
+
+Chemin serveur:
+
+```bash
 /home/RaspCodex2/apps/planete-breizh-checkout
 ```
 
@@ -97,76 +59,11 @@ cd /home/RaspCodex2/apps/planete-breizh-checkout
 curl http://127.0.0.1:4242/health
 ```
 
-Tailscale Funnel expose le backend sur un port separe pour ne pas prendre la
-place de Pi-hole sur `https://rasp2.tail0a90e.ts.net/`.
+## Domaine et email
 
-```text
-https://rasp2.tail0a90e.ts.net:8443/api/create-checkout-session
-```
+Pour un lancement durable, utiliser un domaine propre, puis configurer:
 
-Ne pas utiliser le port 443 racine pour ce backend: il est reserve a Pi-hole.
-
-Configuration Tailscale actuelle:
-
-```bash
-tailscale serve --bg --https=8443 http://127.0.0.1:4242
-tailscale funnel --bg --https=8443 http://127.0.0.1:4242
-```
-
-Configuration active du site:
-
-```js
-window.PLANETE_BREIZH_CHECKOUT_ENDPOINT = "https://rasp2.tail0a90e.ts.net:8443/api/create-checkout-session";
-```
-
-Le backend verifie les IDs produits, les tailles, les prix et les quantites cote
-serveur avant de creer la session Stripe Checkout.
-
-## Photos produits
-
-Les fiches utilisent les previews de mockups recuperees depuis les produits
-publies Printful dans `assets/products`.
-
-## Dropshipping Printful
-
-Les produits Printful sont publies dans la boutique Printful manuelle/API
-`Planete Breizh`.
-
-Flux actuel:
-
-1. Le client choisit un produit sur le site.
-2. Le client paie via Shopify.
-3. La commande est transmise a Printful.
-
-## Email, paiement et livraison
-
-- Email recommande: `contact@planetebreizh.fr`.
-- Paiement recommande: Shopify Payments.
-- Livraison recommandee: Printful via Shopify.
-
-## Reseaux sociaux
-
-Handles recommandes:
-
-- Instagram: `@planetebreizh`
-- Facebook: `Planete Breizh`
-- TikTok: `@planetebreizh`
-
-Pages de creation:
-
-- Instagram: <https://www.instagram.com/>
-- Facebook Page: <https://www.facebook.com/pages/create/>
-- TikTok: <https://www.tiktok.com/signup>
-
-Bio courte:
-
-> Planete Breizh - vetements bretons a la demande. Sois libre. Sois vrai. Ancre-toi.
-
-Premiers posts:
-
-1. Photo du logo + annonce de lancement.
-2. Carrousel des 3 produits femme et 3 produits homme.
-3. Video courte du logo sur les vetements avec appel a commander.
-
-Les produits sont dans `script.js`. Remplacer les prix, descriptions et liens de
-commande quand le fournisseur change.
+- GitHub Pages sur le domaine public de la boutique
+- Cloudflare Tunnel nomme sur un sous-domaine checkout stable
+- adresse email du type `info@planetebreizh.com`
+- SMTP transactionnel pour les notifications de commande
