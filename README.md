@@ -82,6 +82,27 @@ SITE_URL=https://viguiry.github.io/Planete-breizh2
 ALLOWED_ORIGIN=https://viguiry.github.io
 ```
 
+Sur `rasp2`, le backend tourne dans:
+
+```text
+/home/RaspCodex2/apps/planete-breizh-checkout
+```
+
+Commandes utiles:
+
+```bash
+cd /home/RaspCodex2/apps/planete-breizh-checkout
+./node_modules/.bin/pm2 status
+./node_modules/.bin/pm2 restart planete-breizh-checkout --update-env
+curl http://127.0.0.1:4242/health
+```
+
+Tailscale Funnel expose le backend ici:
+
+```text
+https://rasp2.tail0a90e.ts.net/api/create-checkout-session
+```
+
 Exemple apres deploiement Vercel:
 
 ```js
