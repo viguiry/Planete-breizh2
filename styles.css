@@ -216,7 +216,7 @@ img {
 .shop-section,
 .operations,
 .social-section,
-.dropshipping,
+.production,
 .story {
   padding: clamp(54px, 8vw, 104px) clamp(18px, 5vw, 76px);
 }
@@ -563,35 +563,35 @@ h2 {
   line-height: 1.55;
 }
 
-.dropshipping {
+.production {
   background: var(--ink);
   color: white;
 }
 
-.dropshipping h2,
-.dropshipping .eyebrow {
+.production h2,
+.production .eyebrow {
   color: white;
 }
 
-.dropshipping .eyebrow {
+.production .eyebrow {
   opacity: 0.78;
 }
 
-.dropshipping-grid {
+.production-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
   margin-top: 28px;
 }
 
-.dropshipping article {
+.production article {
   padding: 24px;
   border: 1px solid rgba(255, 250, 241, 0.18);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.06);
 }
 
-.dropshipping article span {
+.production article span {
   display: grid;
   place-items: center;
   width: 38px;
@@ -779,7 +779,7 @@ h2 {
   .product-grid,
   .operations-grid,
   .social-grid,
-  .dropshipping-grid {
+  .production-grid {
     grid-template-columns: 1fr;
   }
 

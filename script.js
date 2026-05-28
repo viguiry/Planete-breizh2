@@ -1,61 +1,61 @@
 const products = [
   {
     id: "femme-tee-logo",
-    name: "Women's T-shirt",
+    name: "T-shirt femme Planète Breizh",
     audience: "Femme",
     type: "mockup-shirt mockup-femme mockup-cream",
     image: "assets/products/femme-tee-logo.png",
-    description: "T-shirt femme Printful avec logo Planete Breizh.",
+    description: "T-shirt femme léger avec logo Planète Breizh imprimé sur le devant.",
     prices: { XS: 28, S: 28, M: 28, L: 28, XL: 28, "2XL": 29.5 },
     sizes: ["XS", "S", "M", "L", "XL", "2XL"],
   },
   {
     id: "femme-sweat-logo",
-    name: "Crop Hoodie",
+    name: "Hoodie court femme Planète Breizh",
     audience: "Femme",
     type: "mockup-sweat mockup-femme mockup-mist",
     image: "assets/products/femme-sweat-logo.png",
-    description: "Hoodie court femme Printful avec logo Planete Breizh.",
+    description: "Hoodie court femme, coupe douce et logo Planète Breizh côté coeur.",
     prices: { S: 45.5, M: 45.5, L: 45.5, XL: 45.5, "2XL": 40 },
     sizes: ["S", "M", "L", "XL", "2XL"],
   },
   {
     id: "femme-tank-logo",
-    name: "Ladies' Muscle Tank",
+    name: "Débardeur femme Planète Breizh",
     audience: "Femme",
     type: "mockup-tank mockup-femme mockup-coral",
     image: "assets/products/femme-tank-logo.png",
-    description: "Debardeur femme Printful avec logo Planete Breizh.",
+    description: "Débardeur femme fluide, idéal pour les beaux jours et les retours de plage.",
     prices: { S: 21, M: 21, L: 21, XL: 20.5, "2XL": 23.5 },
     sizes: ["S", "M", "L", "XL", "2XL"],
   },
   {
     id: "homme-tee-logo",
-    name: "Short-Sleeve Unisex T-Shirt",
+    name: "T-shirt unisexe Planète Breizh",
     audience: "Homme",
     type: "mockup-shirt mockup-homme mockup-navy",
     image: "assets/products/homme-tee-logo.png",
-    description: "T-shirt unisexe Printful avec logo Planete Breizh.",
+    description: "T-shirt unisexe simple et confortable avec logo Planète Breizh.",
     prices: { S: 8.5, M: 8.5, L: 8.5, XL: 8.5, "2XL": 10, "3XL": 11.5 },
     sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
   },
   {
     id: "homme-sweat-logo",
-    name: "Men's Tank Top",
+    name: "Débardeur homme Planète Breizh",
     audience: "Homme",
     type: "mockup-sweat mockup-homme mockup-forest",
     image: "assets/products/homme-sweat-logo.png",
-    description: "Debardeur homme Printful avec logo Planete Breizh.",
+    description: "Débardeur homme avec logo Planète Breizh, coupe légère et sportive.",
     prices: { XS: 16.5, S: 16, M: 16, L: 16, XL: 16, "2XL": 17.5 },
     sizes: ["XS", "S", "M", "L", "XL", "2XL"],
   },
   {
     id: "homme-hoodie-logo",
-    name: "Unisex Hoodie",
+    name: "Hoodie unisexe Planète Breizh",
     audience: "Homme",
     type: "mockup-hoodie mockup-homme mockup-rust",
     image: "assets/products/homme-hoodie-logo.png",
-    description: "Hoodie unisexe Printful avec logo Planete Breizh.",
+    description: "Hoodie unisexe chaud avec logo Planète Breizh, pensé pour garder le cap.",
     prices: { S: 25, M: 25, L: 25, XL: 25, "2XL": 26.5, "3XL": 28.5, "4XL": 30, "5XL": 31.5 },
     sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"],
   },
@@ -92,7 +92,7 @@ function renderProducts() {
       (product) => `
         <article class="product-card">
           <div class="product-art">
-            <img class="product-photo" src="${product.image}" alt="${product.name} avec logo Planete Breizh" loading="lazy" />
+            <img class="product-photo" src="${product.image}" alt="${product.name} avec logo Planète Breizh" loading="lazy" />
           </div>
           <div class="product-content">
             <div>
@@ -164,7 +164,7 @@ function renderCart() {
           `
         )
         .join("")
-    : "<p>Ton panier est vide pour le moment.</p>";
+    : "<p>Votre panier est vide pour le moment.</p>";
 
   if (checkoutEndpoint && items.length) {
     checkout.href = "#";
@@ -175,7 +175,7 @@ function renderCart() {
     checkout.href = "#";
     checkout.removeAttribute("target");
     checkout.removeAttribute("rel");
-    checkout.textContent = items.length ? "Paiement bientot sur Shopify" : "Panier vide";
+    checkout.textContent = items.length ? "Paiement indisponible" : "Panier vide";
   }
 }
 
@@ -184,13 +184,13 @@ async function handleCheckout(event) {
 
   if (!items.length) {
     event.preventDefault();
-    alert("Ton panier est vide.");
+    alert("Votre panier est vide.");
     return;
   }
 
   if (checkoutEndpoint) {
     event.preventDefault();
-    checkout.textContent = "Preparation du paiement...";
+    checkout.textContent = "Préparation du paiement...";
     checkout.setAttribute("aria-busy", "true");
 
     try {
@@ -210,7 +210,7 @@ async function handleCheckout(event) {
       if (!response.ok || !data.url) throw new Error(data.error || "Paiement indisponible");
       window.location.href = data.url;
     } catch (error) {
-      alert(`Impossible de preparer le paiement Stripe: ${error.message}`);
+      alert(`Impossible de préparer le paiement : ${error.message}`);
       renderCart();
     } finally {
       checkout.removeAttribute("aria-busy");
@@ -220,7 +220,7 @@ async function handleCheckout(event) {
   }
 
   event.preventDefault();
-  alert("On passe la boutique sur Shopify + Printful pour un vrai panier, livraison et paiement synchronises. Les anciens liens Stripe sont desactives pour eviter des prix incoherents.");
+  alert("Le paiement en ligne est momentanément indisponible. Merci de réessayer plus tard ou de nous contacter par email.");
 }
 
 function openCart() {
