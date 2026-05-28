@@ -97,10 +97,20 @@ cd /home/RaspCodex2/apps/planete-breizh-checkout
 curl http://127.0.0.1:4242/health
 ```
 
-Tailscale Funnel expose le backend ici:
+Tailscale Funnel expose le backend sur un port separe pour ne pas prendre la
+place de Pi-hole sur `https://rasp2.tail0a90e.ts.net/`.
 
 ```text
-https://rasp2.tail0a90e.ts.net/api/create-checkout-session
+https://rasp2.tail0a90e.ts.net:8443/api/create-checkout-session
+```
+
+Ne pas utiliser le port 443 racine pour ce backend: il est reserve a Pi-hole.
+
+Configuration Tailscale actuelle:
+
+```bash
+tailscale serve --bg --https=8443 http://127.0.0.1:4242
+tailscale funnel --bg --https=8443 http://127.0.0.1:4242
 ```
 
 Exemple apres deploiement Vercel:
