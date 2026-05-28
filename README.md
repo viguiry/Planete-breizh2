@@ -21,10 +21,49 @@ Puis ouvrir `http://localhost:8080`.
 3. Dans GitHub: `Settings` -> `Pages` -> `Deploy from a branch`.
 4. Choisir `main` et `/root`.
 
-## Paiement Stripe
+## Prix Printful
 
-Le site garde les liens Stripe Payment Links en secours, mais il contient aussi
-un endpoint Stripe Checkout pret pour un vrai panier unique:
+Les prix du site sont alignes sur les prix au detail Printful des produits
+publies, taille par taille. Le frontend utilise `prices` dans `script.js`; le
+backend Stripe de secours utilise les memes prix en centimes dans
+`api/catalog.js`.
+
+Prix lus dans Printful:
+
+- Women's T-shirt: XS/S/M/L/XL `28.00 EUR`, 2XL `29.50 EUR`
+- Crop Hoodie: S/M/L/XL `45.50 EUR`, 2XL `40.00 EUR`
+- Ladies' Muscle Tank: S/M/L `21.00 EUR`, XL `20.50 EUR`, 2XL `23.50 EUR`
+- Short-Sleeve Unisex T-Shirt: S/M/L/XL `8.50 EUR`, 2XL `10.00 EUR`, 3XL `11.50 EUR`
+- Men's Tank Top: XS `16.50 EUR`, S/M/L/XL `16.00 EUR`, 2XL `17.50 EUR`
+- Unisex Hoodie: S/M/L/XL `25.00 EUR`, 2XL `26.50 EUR`, 3XL `28.50 EUR`, 4XL `30.00 EUR`, 5XL `31.50 EUR`
+
+## Migration Shopify
+
+Decision: Shopify + Printful est le meilleur chemin pour vendre proprement.
+Les anciens liens Stripe produit sont desactives sur le site pour eviter des
+prix incoherents avec Printful.
+
+Pourquoi Shopify:
+
+- variantes, prix et photos synchronises avec Printful
+- vrai panier multi-produits
+- paiement, taxes, livraison et emails clients integres
+- commandes envoyables automatiquement a Printful
+
+Etapes:
+
+1. Creer ou ouvrir la boutique Shopify Planete Breizh.
+2. Installer l'application Printful dans Shopify.
+3. Connecter le store Printful `Planete Breizh` a Shopify.
+4. Pousser les 6 produits Printful vers Shopify.
+5. Verifier prix, tailles, taxes, livraison et moyens de paiement.
+6. Remplacer le bouton panier du site GitHub Pages par le lien Shopify, ou faire
+   pointer le domaine directement vers Shopify.
+
+## Backend Stripe de secours
+
+Le repo contient encore un endpoint Stripe Checkout si on veut garder une option
+custom plus tard:
 
 - Frontend: `script.js`
 - Configuration frontend: `config.js`
@@ -49,8 +88,8 @@ Exemple apres deploiement Vercel:
 window.PLANETE_BREIZH_CHECKOUT_ENDPOINT = "https://ton-backend.vercel.app/api/create-checkout-session";
 ```
 
-Le backend verifie les IDs produits, les tailles et les quantites cote serveur
-avant de creer la session Stripe Checkout.
+Le backend verifie les IDs produits, les tailles, les prix et les quantites cote
+serveur avant de creer la session Stripe Checkout.
 
 ## Photos produits
 
@@ -65,24 +104,14 @@ Les produits Printful sont publies dans la boutique Printful manuelle/API
 Flux actuel:
 
 1. Le client choisit un produit sur le site.
-2. Le client paie via Stripe Checkout.
-3. La commande est ensuite traitee dans Printful.
-
-## Shopify ou Stripe custom?
-
-Pour une boutique Printful qui doit vendre vite, Shopify est le choix le plus
-simple: panier, variantes, taxes, livraison, emails clients, paiements et
-integration Printful sont deja prevus.
-
-Stripe Checkout avec backend est plus leger et moins cher a demarrer, mais il
-faut gerer soi-meme le catalogue, les webhooks, la transmission des commandes a
-Printful, les emails et les cas de support.
+2. Le client paie via Shopify.
+3. La commande est transmise a Printful.
 
 ## Email, paiement et livraison
 
 - Email recommande: `contact@planetebreizh.fr`.
-- Paiement actif: Stripe Payment Links par produit.
-- Livraison recommandee: Printful avec suivi.
+- Paiement recommande: Shopify Payments.
+- Livraison recommandee: Printful via Shopify.
 
 ## Reseaux sociaux
 

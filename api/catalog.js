@@ -1,40 +1,44 @@
 const products = {
   "femme-tee-logo": {
-    name: "T-shirt femme Logo Breizh",
-    price: 2990,
+    name: "Women's T-shirt",
+    prices: { XS: 2800, S: 2800, M: 2800, L: 2800, XL: 2800, "2XL": 2950 },
     image: "/assets/products/femme-tee-logo.png",
-    sizes: ["XS", "S", "M", "L", "XL"],
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
   },
   "femme-sweat-logo": {
-    name: "Sweat femme Logo Phare",
-    price: 4990,
+    name: "Crop Hoodie",
+    prices: { S: 4550, M: 4550, L: 4550, XL: 4550, "2XL": 4000 },
     image: "/assets/products/femme-sweat-logo.png",
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    sizes: ["S", "M", "L", "XL", "2XL"],
   },
   "femme-tank-logo": {
-    name: "Debardeur femme Vagues",
-    price: 2790,
+    name: "Ladies' Muscle Tank",
+    prices: { S: 2100, M: 2100, L: 2100, XL: 2050, "2XL": 2350 },
     image: "/assets/products/femme-tank-logo.png",
-    sizes: ["XS", "S", "M", "L", "XL"],
+    sizes: ["S", "M", "L", "XL", "2XL"],
   },
   "homme-tee-logo": {
-    name: "T-shirt homme Logo Breizh",
-    price: 2990,
+    name: "Short-Sleeve Unisex T-Shirt",
+    prices: { S: 850, M: 850, L: 850, XL: 850, "2XL": 1000, "3XL": 1150 },
     image: "/assets/products/homme-tee-logo.png",
-    sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
   },
   "homme-sweat-logo": {
-    name: "Sweat homme Ancre-toi",
-    price: 4990,
+    name: "Men's Tank Top",
+    prices: { XS: 1650, S: 1600, M: 1600, L: 1600, XL: 1600, "2XL": 1750 },
     image: "/assets/products/homme-sweat-logo.png",
-    sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
   },
   "homme-hoodie-logo": {
-    name: "Hoodie homme Planete",
-    price: 5490,
+    name: "Unisex Hoodie",
+    prices: { S: 2500, M: 2500, L: 2500, XL: 2500, "2XL": 2650, "3XL": 2850, "4XL": 3000, "5XL": 3150 },
     image: "/assets/products/homme-hoodie-logo.png",
-    sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"],
   },
 };
 
-module.exports = { products };
+function getProductPrice(product, size) {
+  return product.prices[size] ?? product.prices[product.sizes[0]];
+}
+
+module.exports = { products, getProductPrice };

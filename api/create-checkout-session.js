@@ -1,5 +1,5 @@
 const Stripe = require("stripe");
-const { products } = require("./catalog");
+const { products, getProductPrice } = require("./catalog");
 
 const siteUrl = process.env.SITE_URL || "https://viguiry.github.io/Planete-breizh2";
 
@@ -38,7 +38,7 @@ function validateItems(items) {
             size: item.size,
           },
         },
-        unit_amount: product.price,
+        unit_amount: getProductPrice(product, item.size),
       },
       quantity,
     };

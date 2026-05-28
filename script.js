@@ -1,81 +1,63 @@
 const products = [
   {
     id: "femme-tee-logo",
-    name: "T-shirt femme Logo Breizh",
+    name: "Women's T-shirt",
     audience: "Femme",
     type: "mockup-shirt mockup-femme mockup-cream",
     image: "assets/products/femme-tee-logo.png",
-    description: "Coupe femme, coton doux, logo Planete Breizh imprime cote coeur.",
-    price: 29.9,
-    sizes: ["XS", "S", "M", "L", "XL"],
-    paymentUrl: "https://buy.stripe.com/5kQdR89eVezM7Dn48e0gw01",
-    makerUrl: "https://buy.stripe.com/5kQdR89eVezM7Dn48e0gw01",
-    makerLabel: "Payer maintenant",
+    description: "T-shirt femme Printful avec logo Planete Breizh.",
+    prices: { XS: 28, S: 28, M: 28, L: 28, XL: 28, "2XL": 29.5 },
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
   },
   {
     id: "femme-sweat-logo",
-    name: "Sweat femme Logo Phare",
+    name: "Crop Hoodie",
     audience: "Femme",
     type: "mockup-sweat mockup-femme mockup-mist",
     image: "assets/products/femme-sweat-logo.png",
-    description: "Sweat confortable avec logo Planete Breizh central, parfait pour les soirees fraiches.",
-    price: 49.9,
-    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-    paymentUrl: "https://buy.stripe.com/aFadR8aiZbnA5vf34a0gw02",
-    makerUrl: "https://buy.stripe.com/aFadR8aiZbnA5vf34a0gw02",
-    makerLabel: "Payer maintenant",
+    description: "Hoodie court femme Printful avec logo Planete Breizh.",
+    prices: { S: 45.5, M: 45.5, L: 45.5, XL: 45.5, "2XL": 40 },
+    sizes: ["S", "M", "L", "XL", "2XL"],
   },
   {
     id: "femme-tank-logo",
-    name: "Debardeur femme Vagues",
+    name: "Ladies' Muscle Tank",
     audience: "Femme",
     type: "mockup-tank mockup-femme mockup-coral",
     image: "assets/products/femme-tank-logo.png",
-    description: "Debardeur leger avec logo Planete Breizh, coupe ete et esprit bord de mer.",
-    price: 27.9,
-    sizes: ["XS", "S", "M", "L", "XL"],
-    paymentUrl: "https://buy.stripe.com/cNi5kC9eV0IW6zj9sy0gw03",
-    makerUrl: "https://buy.stripe.com/cNi5kC9eV0IW6zj9sy0gw03",
-    makerLabel: "Payer maintenant",
+    description: "Debardeur femme Printful avec logo Planete Breizh.",
+    prices: { S: 21, M: 21, L: 21, XL: 20.5, "2XL": 23.5 },
+    sizes: ["S", "M", "L", "XL", "2XL"],
   },
   {
     id: "homme-tee-logo",
-    name: "T-shirt homme Logo Breizh",
+    name: "Short-Sleeve Unisex T-Shirt",
     audience: "Homme",
     type: "mockup-shirt mockup-homme mockup-navy",
     image: "assets/products/homme-tee-logo.png",
-    description: "T-shirt homme avec logo Planete Breizh poitrine, coupe droite et coton resistant.",
-    price: 29.9,
-    sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
-    paymentUrl: "https://buy.stripe.com/7sYbJ0gHnezM3n7fQW0gw04",
-    makerUrl: "https://buy.stripe.com/7sYbJ0gHnezM3n7fQW0gw04",
-    makerLabel: "Payer maintenant",
+    description: "T-shirt unisexe Printful avec logo Planete Breizh.",
+    prices: { S: 8.5, M: 8.5, L: 8.5, XL: 8.5, "2XL": 10, "3XL": 11.5 },
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
   },
   {
     id: "homme-sweat-logo",
-    name: "Sweat homme Ancre-toi",
+    name: "Men's Tank Top",
     audience: "Homme",
     type: "mockup-sweat mockup-homme mockup-forest",
     image: "assets/products/homme-sweat-logo.png",
-    description: "Sweat epais avec logo central, pense pour les retours de plage et les matins frais.",
-    price: 49.9,
-    sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
-    paymentUrl: "https://buy.stripe.com/cNiaEWcr79fs1eZawC0gw05",
-    makerUrl: "https://buy.stripe.com/cNiaEWcr79fs1eZawC0gw05",
-    makerLabel: "Payer maintenant",
+    description: "Debardeur homme Printful avec logo Planete Breizh.",
+    prices: { XS: 16.5, S: 16, M: 16, L: 16, XL: 16, "2XL": 17.5 },
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
   },
   {
     id: "homme-hoodie-logo",
-    name: "Hoodie homme Planete",
+    name: "Unisex Hoodie",
     audience: "Homme",
     type: "mockup-hoodie mockup-homme mockup-rust",
     image: "assets/products/homme-hoodie-logo.png",
-    description: "Hoodie a capuche avec logo Planete Breizh, style marin chaud et robuste.",
-    price: 54.9,
-    sizes: ["S", "M", "L", "XL", "XXL", "3XL"],
-    paymentUrl: "https://buy.stripe.com/bJedR8cr7ezM5vf7kq0gw06",
-    makerUrl: "https://buy.stripe.com/bJedR8cr7ezM5vf7kq0gw06",
-    makerLabel: "Payer maintenant",
+    description: "Hoodie unisexe Printful avec logo Planete Breizh.",
+    prices: { S: 25, M: 25, L: 25, XL: 25, "2XL": 26.5, "3XL": 28.5, "4XL": 30, "5XL": 31.5 },
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"],
   },
 ];
 
@@ -92,6 +74,17 @@ const cartCount = document.querySelector("[data-cart-count]");
 const cartTotal = document.querySelector("[data-cart-total]");
 const checkout = document.querySelector("[data-checkout]");
 const checkoutEndpoint = window.PLANETE_BREIZH_CHECKOUT_ENDPOINT || "";
+
+function getProductPrice(product, size = product.sizes[0]) {
+  return product.prices[size] ?? product.prices[product.sizes[0]];
+}
+
+function getProductPriceLabel(product) {
+  const prices = product.sizes.map((size) => getProductPrice(product, size));
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+  return min === max ? formatter.format(min) : `${formatter.format(min)} - ${formatter.format(max)}`;
+}
 
 function renderProducts() {
   grid.innerHTML = products
@@ -114,12 +107,9 @@ function renderProducts() {
               </select>
             </label>
             <div class="product-meta">
-              <span class="price">${formatter.format(product.price)}</span>
+              <span class="price" data-price-for="${product.id}">${getProductPriceLabel(product)}</span>
               <button class="add-button" type="button" data-add="${product.id}">Ajouter</button>
             </div>
-            <a class="maker-action" href="${product.makerUrl}" target="_blank" rel="noopener">
-              ${product.makerLabel}
-            </a>
           </div>
         </article>
       `
@@ -153,7 +143,7 @@ function removeFromCart(cartKey) {
 function renderCart() {
   const items = [...cart.values()];
   const count = items.reduce((sum, item) => sum + item.quantity, 0);
-  const total = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const total = items.reduce((sum, item) => sum + getProductPrice(item.product, item.size) * item.quantity, 0);
 
   cartCount.textContent = count;
   cartTotal.textContent = formatter.format(total);
@@ -165,10 +155,9 @@ function renderCart() {
             <div class="cart-item">
               <div>
                 <strong>${product.name}</strong>
-                <span>Taille ${size} - ${quantity} x ${formatter.format(product.price)}</span>
+                <span>Taille ${size} - ${quantity} x ${formatter.format(getProductPrice(product, size))}</span>
               </div>
               <div class="cart-actions">
-                <a href="${product.paymentUrl}" target="_blank" rel="noopener">Payer</a>
                 <button type="button" data-remove="${product.id}:${size}">Retirer</button>
               </div>
             </div>
@@ -182,16 +171,11 @@ function renderCart() {
     checkout.removeAttribute("target");
     checkout.removeAttribute("rel");
     checkout.textContent = "Payer le panier";
-  } else if (items.length === 1) {
-    checkout.href = items[0].product.paymentUrl;
-    checkout.target = "_blank";
-    checkout.rel = "noopener";
-    checkout.textContent = "Payer maintenant";
   } else {
     checkout.href = "#";
     checkout.removeAttribute("target");
     checkout.removeAttribute("rel");
-    checkout.textContent = items.length ? "Payer les articles" : "Panier vide";
+    checkout.textContent = items.length ? "Paiement bientot sur Shopify" : "Panier vide";
   }
 }
 
@@ -235,10 +219,8 @@ async function handleCheckout(event) {
     return;
   }
 
-  if (items.length > 1) {
-    event.preventDefault();
-    alert("Paiement direct Stripe: clique sur Payer a cote de chaque article du panier. Pour un panier mixte en un seul paiement, il faudra connecter Shopify ou Stripe Checkout avec backend.");
-  }
+  event.preventDefault();
+  alert("On passe la boutique sur Shopify + Printful pour un vrai panier, livraison et paiement synchronises. Les anciens liens Stripe sont desactives pour eviter des prix incoherents.");
 }
 
 function openCart() {
@@ -264,6 +246,15 @@ document.addEventListener("click", (event) => {
   if (event.target.closest("[data-close-cart]")) closeCart();
   if (event.target.closest("[data-checkout]")) handleCheckout(event);
   if (event.target === cartPanel) closeCart();
+});
+
+document.addEventListener("change", (event) => {
+  const select = event.target.closest("[data-size-for]");
+  if (!select) return;
+
+  const product = products.find((item) => item.id === select.dataset.sizeFor);
+  const price = document.querySelector(`[data-price-for="${select.dataset.sizeFor}"]`);
+  if (product && price) price.textContent = formatter.format(getProductPrice(product, select.value));
 });
 
 renderProducts();
