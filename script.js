@@ -86,7 +86,7 @@ function renderProducts() {
       (product) => `
         <article class="product-card">
           <div class="product-art">
-            <img class="product-photo" src="${product.image}?v=1" alt="${product.name} avec logo Planète Breizh" loading="lazy" />
+            <img class="product-photo" src="${product.image}?v=2" alt="${product.name} avec logo Planète Breizh" loading="lazy" />
           </div>
           <div class="product-content">
             <div>
