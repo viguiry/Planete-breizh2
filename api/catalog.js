@@ -1,39 +1,39 @@
 const products = {
-  "femme-tee-logo": {
-    name: "T-shirt femme Planète Breizh",
-    prices: { XS: 2800, S: 2800, M: 2800, L: 2800, XL: 2800, "2XL": 2950 },
-    image: "/assets/products/femme-tee-logo.png",
+  "femme-chemisette-logo": {
+    name: "Chemisette femme Planète Breizh",
+    prices: { XS: 3900, S: 3900, M: 3900, L: 3900, XL: 4100, "2XL": 4300 },
+    image: "/assets/products/femme-chemisette-logo.png",
     sizes: ["XS", "S", "M", "L", "XL", "2XL"],
   },
-  "femme-sweat-logo": {
-    name: "Hoodie court femme Planète Breizh",
-    prices: { S: 4550, M: 4550, L: 4550, XL: 4550, "2XL": 4000 },
-    image: "/assets/products/femme-sweat-logo.png",
-    sizes: ["S", "M", "L", "XL", "2XL"],
+  "femme-polo-logo": {
+    name: "Polo femme Planète Breizh",
+    prices: { XS: 3400, S: 3400, M: 3400, L: 3400, XL: 3600, "2XL": 3800 },
+    image: "/assets/products/femme-polo-logo.png",
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
   },
-  "femme-tank-logo": {
-    name: "Débardeur femme Planète Breizh",
-    prices: { S: 2100, M: 2100, L: 2100, XL: 2050, "2XL": 2350 },
-    image: "/assets/products/femme-tank-logo.png",
-    sizes: ["S", "M", "L", "XL", "2XL"],
+  "femme-mariniere-logo": {
+    name: "Marinière femme Planète Breizh",
+    prices: { XS: 3600, S: 3600, M: 3600, L: 3600, XL: 3800, "2XL": 4000 },
+    image: "/assets/products/femme-mariniere-logo.png",
+    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
   },
-  "homme-tee-logo": {
-    name: "T-shirt unisexe Planète Breizh",
-    prices: { S: 850, M: 850, L: 850, XL: 850, "2XL": 1000, "3XL": 1150 },
-    image: "/assets/products/homme-tee-logo.png",
+  "homme-chemisette-logo": {
+    name: "Chemisette homme Planète Breizh",
+    prices: { S: 3900, M: 3900, L: 3900, XL: 4100, "2XL": 4300, "3XL": 4500 },
+    image: "/assets/products/homme-chemisette-logo.png",
     sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
   },
-  "homme-sweat-logo": {
-    name: "Débardeur homme Planète Breizh",
-    prices: { XS: 1650, S: 1600, M: 1600, L: 1600, XL: 1600, "2XL": 1750 },
-    image: "/assets/products/homme-sweat-logo.png",
-    sizes: ["XS", "S", "M", "L", "XL", "2XL"],
+  "homme-polo-logo": {
+    name: "Polo homme Planète Breizh",
+    prices: { S: 3400, M: 3400, L: 3400, XL: 3600, "2XL": 3800, "3XL": 4000 },
+    image: "/assets/products/homme-polo-logo.png",
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
   },
-  "homme-hoodie-logo": {
-    name: "Hoodie unisexe Planète Breizh",
-    prices: { S: 2500, M: 2500, L: 2500, XL: 2500, "2XL": 2650, "3XL": 2850, "4XL": 3000, "5XL": 3150 },
-    image: "/assets/products/homme-hoodie-logo.png",
-    sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL"],
+  "homme-mariniere-logo": {
+    name: "Marinière homme Planète Breizh",
+    prices: { S: 3600, M: 3600, L: 3600, XL: 3800, "2XL": 4000, "3XL": 4200 },
+    image: "/assets/products/homme-mariniere-logo.png",
+    sizes: ["S", "M", "L", "XL", "2XL", "3XL"],
   },
 };
 
